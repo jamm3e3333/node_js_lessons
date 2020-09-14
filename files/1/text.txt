@@ -1,0 +1,2 @@
+This is a new nodejs file
+this is the appended text
