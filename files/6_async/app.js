@@ -1,7 +1,7 @@
 const request = require('request');
 const geocode = require('./geocode.js');
 const weather = require('./weather.js');
-
+const args = process.argv[2].toString();
 
 
 // request({url: url, json: true}, (error, response) => {
@@ -44,21 +44,27 @@ const weather = require('./weather.js');
     
     
 // })
-geocode('Santo Domingo', (error, data) => {
-    if(error){
-        console.log(error);
-    }
-    else{
-        console.log(data);
-        weather(data.latitude,data.longitude,(weatherError,weatherData) => {
-            if(weatherError){
-                console.log(weatherError);
-            }
-            else{
-                console.log(weatherData);
-            }
-        });
-    }
-});
 
-module.exports = geocode;
+if(args == ''){
+    console.log('wrong argument');
+    console.log(`The argument: ${args} is wrong`);
+    console.log(typeof args);
+}
+else{
+    geocode(args, (error, data) => {
+        if(error){
+            console.log(error);
+        }
+        else{
+            console.log(data);
+            weather(data.latitude,data.longitude,(weatherError,weatherData) => {
+                if(weatherError){
+                    console.log(weatherError);
+                }
+                else{
+                    console.log(weatherData);
+                }
+            });
+        }
+    });
+}
