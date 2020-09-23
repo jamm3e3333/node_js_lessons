@@ -1,4 +1,4 @@
-const APIkey = 'ee1f407f492625b5e74f4c638bb1eed0';
+const APIkey = '';
 const request = require('request');
 
 
