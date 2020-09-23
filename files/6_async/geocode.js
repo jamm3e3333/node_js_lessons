@@ -1,4 +1,4 @@
-const geoKey = 'pk.eyJ1IjoiamFtbTNlMzMzMyIsImEiOiJja2Y0YzRyMXowYm0wMnVvZjNxN3Bvajg4In0.-q0Nmdmzez03nvzDcxSreA';
+const geoKey = '';
 const request = require('request');
 
 //const add = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Ostrava.json?access_token=pk.eyJ1IjoiamFtbTNlMzMzMyIsImEiOiJja2Y0YzRyMXowYm0wMnVvZjNxN3Bvajg4In0.-q0Nmdmzez03nvzDcxSreA&limit=1';
