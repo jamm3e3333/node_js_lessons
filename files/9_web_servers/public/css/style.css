@@ -1,0 +1,23 @@
+html{
+    background-image: url('../img/bk.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    font-family: calibri;
+}
+h1 {
+    color: lightgreen;
+    
+}
+
+a{
+    text-decoration: none;
+    color:white;
+    text-transform: uppercase;
+}
+li {
+    display: inline;
+    list-style-type: none;
+    margin-right: 20px;
+    
+}

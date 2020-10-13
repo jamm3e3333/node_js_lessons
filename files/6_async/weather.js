@@ -1,20 +1,21 @@
-const APIkey = 'ee1f407f492625b5e74f4c638bb1eed0';
+const keys = require('./main.js');
 const request = require('request');
+const fs = require('fs');
 
 
 weather = (latitude,longitude, cb ) => {
-    const url = `http://api.weatherstack.com/current?access_key=${APIkey}&query=${latitude},${longitude}`;
-    request({url: url, json:true}, (error,response) => {
+    const url = `http://api.weatherstack.com/current?access_key=${keys.weather}&query=${latitude},${longitude}`;
+    request({url, json:true}, (error,{body}) => {
         if(error){
             cb('Connection interrupted',undefined);
         }
-        else if(response.body.error){
+        else if(body.error){
             cb('The location doesn\'t exist!');
         }
         else{
-            const w = response.body.current;
-            const location = response.body.location;
-            cb(undefined,`${w.weather_descriptions[0]} \nCity: ${location.name} \nCurrent temperature: ${w.temperature} °C\nFeels like: ${w.feelslike} °C`);
+            const bodyJSON = JSON.stringify(body);
+            fs.writeFileSync('weather.json',bodyJSON);
+            cb(undefined,`${body.current.weather_descriptions[0]} \nCity: ${body.location.name} \nCurrent temperature: ${body.current.temperature} °C\nFeels like: ${body.current.feelslike} °C\nThe rain conditions are: ${body.current.weather_descriptions[0]}`);
         }
     });
 }

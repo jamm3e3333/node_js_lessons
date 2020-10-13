@@ -51,13 +51,13 @@ if(args == ''){
     console.log(typeof args);
 }
 else{
-    geocode(args, (error, data) => {
+    geocode(args, (error, {longitude,latitude} = {}) => {
         if(error){
             console.log(error);
         }
         else{
-            console.log(data);
-            weather(data.latitude,data.longitude,(weatherError,weatherData) => {
+            console.log(longitude,latitude);
+            weather(latitude,longitude,(weatherError,weatherData) => {
                 if(weatherError){
                     console.log(weatherError);
                 }
