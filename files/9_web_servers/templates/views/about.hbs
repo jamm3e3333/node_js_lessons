@@ -7,12 +7,11 @@
     <title>About</title>
 </head>
 <body>
-    <h1>About this webpage</h1>
-    <p>I am a {{position}} at {{place}}</p>
-    <ul >
-        <li><a href="index">home</a></li>
-        <li><a href="help">help</a></li>
-    </ul>
-    <img src="./img/info.png">
+    {{>header}}
+    <div>
+        <img src="./img/info.png">
+    </div>
+    {{>para}}
+    {{>footer}}
 </body>
 </html>
