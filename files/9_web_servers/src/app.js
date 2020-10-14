@@ -18,10 +18,6 @@ hbs.registerPartials(partialsPath);
 //set up the local directory to serve
 app.use(express.static(publicDirectory));
 
-app.listen(3000,() => {
-    console.log('Server is up on port 3000.');
-});
-
 app.get('', (req, res) => {
     res.render('index',{
         title: 'Weather app',
@@ -58,6 +54,29 @@ app.get('/weather', (req,res) => {
         feelsLike: 34.5
     }]);
 });
+
+app.get('/help/*', (req,res) => {
+    res.render('errorPage',{
+        errMessage: 'Help extension wasn\'t found',
+        title: '404',
+        name: 'Jakub Vala',
+        place: 'VSB-TUO'
+    })
+})
+
+app.get('*', (req,res) => {
+    res.render('errorPage',{
+        errMessage: 'Page not found',
+        title: '404',
+        name: 'Jakub Vala',
+        place: 'VSB-TUO'
+    })
+})
+
+app.listen(3000,() => {
+    console.log('Server is up on port 3000.');
+});
+
 //app.com
 //app.com/help
 //app.com/about

@@ -1,13 +1,14 @@
-html{
-    background-size: cover;
-    background-repeat: no-repeat;
+body{
     text-align: center;
     font-family: calibri;
+    margin: 0 auto;
+    padding: 0 16px;
 }
 
 
 h1 {
     color: lightgreen;
+    text-transform: uppercase;
     
 }
 
