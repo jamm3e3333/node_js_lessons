@@ -1,7 +1,7 @@
+//impoting modules
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
-
 const app = express();
 
 //Define paths for Express config
