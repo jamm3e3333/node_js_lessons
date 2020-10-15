@@ -44,15 +44,24 @@ app.get('/help', (req,res) => {
 })
 
 app.get('/weather', (req,res) => {
-    res.send([{
-        city: 'Opava',
-        temp: 32,
-        feelsLike: 33.2
-    },{
-        city: 'Ostrava',
-        temp: 34,
-        feelsLike: 34.5
-    }]);
+    if(!req.query.address){
+        return res.send({
+            error: 'You must provide address query!'
+        });
+    }
+    res.send(req.query.address);
+});
+
+app.get('/products', (req, res) => {
+    if (!req.query.search){
+        return res.send({
+            error: 'You must provide a search term'
+        })
+    }
+    console.log(req.query.search);
+    res.send({
+        products: []
+    })
 });
 
 app.get('/help/*', (req,res) => {
