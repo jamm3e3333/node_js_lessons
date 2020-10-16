@@ -28,6 +28,7 @@ app.get('', (req, res) => {
     });
 });
 
+//request for 
 app.get('/about',(req,res) => {
     res.render('about',{
         title: 'Weather app',
