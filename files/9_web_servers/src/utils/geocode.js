@@ -9,7 +9,7 @@ const geocode = (address, callback) => {
                 callback('Connection interrupted!',undefined);
             }
             else if(!body.features.length){
-                callback('The loaction doesn\'t exist!');
+                callback('The location doesn\'t exist!');
             }
             else{
                 callback(undefined,{

@@ -15,7 +15,7 @@ weather = (latitude,longitude, cb ) => {
         else{
             const bodyJSON = JSON.stringify(body);
             fs.writeFileSync('weather.json',bodyJSON);
-            cb(undefined,`${body.current.weather_descriptions[0]} \nCity: ${body.location.name} \nCurrent temperature: ${body.current.temperature} °C\nFeels like: ${body.current.feelslike} °C\nThe rain conditions are: ${body.current.weather_descriptions[0]}`);
+            cb(undefined,body);
         }
     });
 }
