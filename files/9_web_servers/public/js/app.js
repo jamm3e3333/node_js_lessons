@@ -14,7 +14,7 @@ weatherForm.addEventListener('submit', (e) => {
         loc.textContent = 'Add the location.';
     }
     else{
-        getData(`http://localhost:3000/weather?address=${location}`)
+        getData(`/weather?address=${location}`)
         .then(({weather, location, address}) => {
             loc.innerHTML = `Weather in ${location}:`;
             weatherMsg.innerText = `Local time: ${weather.location.localtime.substr(11,16)}\nTemperature: ${weather.current.temperature} °C\nFeels like: ${weather.current.feelslike} °C\n${weather.current.weather_descriptions[0]}\nPressure: ${weather.current.pressure} hPa`;
