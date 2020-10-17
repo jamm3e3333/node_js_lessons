@@ -12,12 +12,18 @@
     <div>
         <form name="formWeather">
             <input  type="text"
+                    class="txtCity"
                     size="10"
                     placeholder="City..." />
 
             <button>Search</button>
         </form>
     </div>
+    <div style="display:block">
+        <p id="location"></p>
+        <p id="weatherMsg"></p>
+    </div>
+
     {{>para}}
     {{>footer}}
     <script language="javascript" src="./js/app.js"></script>

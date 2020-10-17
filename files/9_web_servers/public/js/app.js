@@ -1,28 +1,36 @@
 console.log('client side javascript message printed!');
-const city = 'Oslo';
-const search = document.querySelector('input[type="text"]');
-
+const search = document.querySelector('.txtCity');
 const weatherForm = document.querySelector('form');
+const loc = document.querySelector('#location');
+const weatherMsg = document.querySelector('#weatherMsg');
+
 weatherForm.addEventListener('submit', (e) => {
     const location = search.value;
+    loc.textContent = 'Loading...';
+    weatherMsg.textContent = '';
+    
+    e.preventDefault();    
     if(!location){
-        console.log('Put some values!')
-    }
-    else if(data.err){
-        console.log(data.err);
+        loc.textContent = 'Add the location.';
     }
     else{
-        fetch(`http://localhost:3000/weather?address=${location}`).then((response) => {
-            return response.json();
-        }).then(({weather, location, address}) => {
-            console.log(weather);
-            console.log(location);
-            console.log(address);
-        }).catch((err) => {
-            console.log(`Error has occured: ${err}`);
+        getData(`http://localhost:3000/weather?address=${location}`)
+        .then(({weather, location, address}) => {
+            loc.innerHTML = `Weather in ${location}:`;
+            weatherMsg.innerText = `Local time: ${weather.location.localtime.substr(11,16)}\nTemperature: ${weather.current.temperature} °C\nFeels like: ${weather.current.feelslike} °C\n${weather.current.weather_descriptions[0]}\nPressure: ${weather.current.pressure} hPa`;
+        })
+        .catch((err) => {
+            loc.textContent = 'Error getting the location.';
+            weatherMsg.textContent = err;
         });
     }
-
-    e.preventDefault();    
-    
 });
+
+const getData = async(resource) => {
+    const response = await fetch(resource);
+    if(response.status !== 200){
+        throw Error('Data not fetched');
+    }
+    const dataCity = await response.json();
+    return dataCity;
+}
