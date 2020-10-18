@@ -79,3 +79,9 @@ img.info {
     border: 3px solid black;
     border-radius: 5px;
 }
+
+@media only screen and (max-width: 500px){
+    div{
+        width: 80%;
+    }
+}
