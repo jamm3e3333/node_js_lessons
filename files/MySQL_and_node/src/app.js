@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const hbs = require('hbs');
 const db = require('./utils/dbSetUp.js');
+const { copyFile } = require('fs');
 
 
 const publicDirectoryPath = path.join(__dirname,'../public');
@@ -19,19 +20,19 @@ app.use(express.static(publicDirectoryPath));
 
 app.get('',(req,res) => {
     res.render('index',{
-        title: 'Welcome'
+        title: 'Jakub Vala'
     })
 });
 
 app.get('/login',(req, res) => {
     res.render('login',{
-
+        title: 'Jakub Vala'
     });
 });
 
 app.get('/register', (req, res) => {
     res.render('register',{
-
+        title: 'Jakub Vala'
     })
 })
 
