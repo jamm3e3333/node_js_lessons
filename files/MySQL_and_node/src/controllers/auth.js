@@ -1,4 +1,6 @@
 exports.register = (req, res) => {
     console.log(req.body);
-    res.send('Form submited.')
+    res.send({
+        data: req.body
+    })
 }
