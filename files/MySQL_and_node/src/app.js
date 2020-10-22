@@ -19,6 +19,7 @@ app.use(express.json());
 app.use('', require('./routes/pages.js'));
 app.use('/auth', require('./routes/auth.js'));
 
+
 app.get('/login',(req, res) => {
     res.render('login',{
         title: 'Jakub Vala'
