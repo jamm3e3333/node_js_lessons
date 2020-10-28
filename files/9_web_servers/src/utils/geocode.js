@@ -1,9 +1,13 @@
-
-const key = 'pk.eyJ1IjoiamFtbTNlMzMzMyIsImEiOiJja2Y0YzRyMXowYm0wMnVvZjNxN3Bvajg4In0.-q0Nmdmzez03nvzDcxSreA';
+const dotenv = require('dotenv');
+const path = require('path');
 const request = require('request');
 
+dotenv.config({
+    path: path.join(__dirname, '../.env')
+})
+
 const geocode = (address, callback) => {
-    const url_geo = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${key}&limit=1`;
+    const url_geo = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${process.env.API_KEY_GEOCODE}&limit=1`;
     request({url: url_geo,json: true}, (error, {body}) => {
             if(error){
                 callback('Connection interrupted!',undefined);
