@@ -1,0 +1,1 @@
+/Users/Uzivatel/mognoDB/bin/mongod.exe --dbpath=/Users/Uzivatel/mognoDB-data
