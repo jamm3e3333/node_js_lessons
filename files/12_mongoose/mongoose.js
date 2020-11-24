@@ -59,6 +59,28 @@ const Task = mongoose.model('Task',{
     }
 })
 
+const colors = mongoose.model('Color',{
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    rgb: {
+        type: String,
+        required: true,
+        validate(value){
+            if(value.length < 7 && value.length > 7){
+                throw new Error('The length must be 6 digit number.');
+            }
+        }
+    },
+    description: {
+        type: String,
+        trim: true,
+        required: false
+    }
+});
+
 const me = new User({
     name: 'Jackop',
     email: 'JAMM@GOOGLE.COM',
@@ -70,6 +92,17 @@ const work = new Task({
     description: 'Sleeping'
 });
 
+const blue = new colors({
+    name: 'lightblue',
+    rgb: '#90ee90',
+    description: 'It\'s light blue color.'
+})
+
+const green = new colors({
+    name: 'lightgreen',
+    rgb:  '#32cd32'
+});
+
 // me.save()
 //     .then(() => {
 //         console.log(me);
@@ -79,10 +112,26 @@ const work = new Task({
 //     })
 
 
-work.save()
+// work.save()
+//     .then(() => {
+//         console.log(work);
+//     })
+//     .catch((err) => {
+//         console.log(error);
+//     })
+
+// blue.save()
+//     .then(() => {
+//         console.log(blue);
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     })
+
+green.save()
     .then(() => {
-        console.log(work);
+        console.log(green);
     })
     .catch((err) => {
-        console.log(error);
-    })
+        console.log(err);
+    });
