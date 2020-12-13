@@ -1,0 +1,12 @@
+body{
+    font-family: calibri;
+    font-size: 15px;
+    text-align: center;
+}
+
+div.main{
+    width: 80%;
+    padding: 10px 10px 10px 10px;
+    margin: auto;
+    
+}
