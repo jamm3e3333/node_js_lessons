@@ -18,10 +18,13 @@ hbs.registerPartials(pathPartials);
 app.use(express.static(pathPublic));
 
 app.get('',(req,res) => {
+    let mrtvy;
+    let pocet;
+
     covid.getCorona((error,data) => {
         if(error){
-            return res.send({
-                pocet: 'Error 404'
+            return res.send('error',{
+                error: 'Error 404'
             })
         }
         let date = new Date();
@@ -30,29 +33,49 @@ app.get('',(req,res) => {
         let day = parseInt(date.toString().substr(8,2))-1;
 
         let today = `${year}-${month}-${day}`
-        let pocet;
+        
 
         pocet = data.filter(poc => {
             return poc.datum == today;
-        })
-        res.render('corona',{
-            datum: pocet[0].datum,
-            pocet: pocet[0].pocetCelkem
-        })
-    });
+        });
 
-    covid.getDeaths((error,data) => {
+        today = `${day}.${month}.${year}`
+        
+        res.render('corona',{
+            datum: today,
+            pocet: covid.parserNum(pocet[0].pocetCelkem)
+        });
+        
+    });
+})
+
+app.get('/deaths',(req,res) => {
+    covid.getDeaths((error,dataDeaths) => {
         if(error){
-            return res.render('corona',{
-                death: 'Error 404'
+            return res.send('error',{
+                error: 'Error 404'
             })
         }
-        let Date1 = new Date();
-        
-        res.render({
-            
-        })
-    })
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth()%12+1;
+        let day = parseInt(date.toString().substr(8,2))-1;
+    
+        let today = `${year}-${month}-${day}`
+        mrtvy = dataDeaths.filter(poc => {
+            return poc.datum == today;
+        });
+
+        today = `${day}.${month}.${year}`
+
+        res.render('deaths',{
+            datum: today,
+            pocet_nakazenych: covid.parserNum(mrtvy[0].kumulovany_pocet_nakazenych),
+            pocet_vylecenych: covid.parserNum(mrtvy[0].kumulovany_pocet_vylecenych),
+            pocet_umrti: covid.parserNum(mrtvy[0].kumulovany_pocet_umrti),
+            pocet_testu: covid.parserNum(mrtvy[0].kumulovany_pocet_provedenych_testu)
+        });
+    });
 })
 
 app.listen(port,() => {

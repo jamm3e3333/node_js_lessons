@@ -10,12 +10,12 @@ dotenv.config({
 getDeaths = (cb) => {
     url = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/nakazeni-vyleceni-umrti-testy.json';
 
-    request({url,json: true},(error,data) => {
+    request({url,json: true},(error,{body}) => {
         if(error){
             cb('Data se nepodařilo načíst.',undefined);
         }
         else{
-            cb(undefined,data);
+            cb(undefined,body.data);
         }
     })
 }
@@ -31,27 +31,28 @@ getCorona = (cb) =>{
     })
 }
 
-// getCorona((error,data) => {
-//     if(error){
-//         console.log(error);
-//     }
-//     else{
-//         let date = new Date();
-//         let year = date.getFullYear();
-//         let month = date.getMonth()%12+1;
-//         let day = parseInt(date.toString().substr(8,2))-1;
+temp = '';
 
-//         let today = `${year}-${month}-${day}`
-//         let pocet;
+parserNum = (num) =>{
+    num = num.toString();
+    // if(num.length < 4){
+    //     return num;
+    // }
+    let st ='';
 
-//         pocet = data.filter(poc => {
-//             return poc.datum == today;
-//         })
-//         console.log(today.toString(),pocet[0].pocetCelkem,pocet[0].datum);
-//     }
-// })
+    for(i = 0; i < num.length; i++){
+        st = num[num.length -(1+i)] + st;
+        if(((i+1)%3 == 0) && (i+1 != num.length)){
+            st = ' ' + st;
+        }
+    }
+    num = st;
+    return num;
+}
+
 
 module.exports = {
                     getCorona,
-                    getDeaths
+                    getDeaths,
+                    parserNum
                 }
