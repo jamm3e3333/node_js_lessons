@@ -1,59 +1,94 @@
 body{
-    font-family: calibri;
-    font-size: 15px;
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
     text-align: center;
-    font-size: 20px;
-}
-
-a {
-    color: black;
-    text-decoration: none;
-    font-size: 20px;
-    padding: 10px 15px;
-    transition-delay: 100ms;
-}
-
-a:hover{
-    color: gray;
-}
-
-.head{
-    background: linear-gradient(to bottom right, #ffffff 0%, #ff9900 100%);
-    width: 100%;
-    left: 0;
-    top: 0;
-    margin-left: auto;
-    margin-right: auto;
-    position: absolute;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 50px 10px 50px 10px;
-    border: 3px solid black;
-    border-radius: 10px;
+    background-color: #404040;
+    color: white;
 }
 
 h1{
-    font-size: 20px;
-    margin-top: 30px;
-}
-
-div.main{
-    width: 80%;
-    padding: 5px 10px 5px 10px;
-    margin: auto;
-    margin-top: 20px;
-}
-
-
-
-.main table{
-    transform: translateY(50%);
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.main td{
-    padding: 5px 10px 5px 10px;
+    margin-top: 50px;
+    margin-bottom: 20px;
     font-size: 18px;
 }
 
+p{
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.navbar-menu{
+    border-radius: 5px;
+    background: #3299a8;
+}
+
+.navbar-menu ul{
+    margin:0;
+    padding:0;
+    list-style: none;
+    text-align: center;
+}
+
+.navbar-menu li{
+    display: inline-block;
+}
+
+.navbar-menu a{
+    text-decoration: none;
+    width: 100px;
+    color: white;
+    display: block; 
+    padding: 25px 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+.navbar-menu a:hover{
+    color:#b06a6a;
+}
+.tab-div table{
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background: silver;
+    border-radius: 8px;
+}
+
+table, td{
+    border-collapse: collapse;
+    border-radius: 2px;
+    text-align: left;
+    font-size: 18px;
+    color: black;
+}
+
+td{
+    padding: 15px;
+}
+
+.inf{
+    color: #c99300;
+}
+
+.cured{
+    color: #00c965;
+}
+
+.dead{
+    color: red;
+}
+
+.tested{
+    color: blue;
+}
+
+@media only screen and (max-width: 600px) {
+    p {
+      width: 100%;
+    }
+  }

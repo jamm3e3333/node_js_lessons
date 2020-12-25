@@ -2,6 +2,7 @@ const request = require('request');
 const dotenv = require('dotenv');
 const path = require('path');
 const fs = require('fs');
+const { getHeapStatistics } = require('v8');
 
 dotenv.config({
     path: path.join(__dirname,'../.env')
@@ -32,12 +33,19 @@ getCorona = (cb) =>{
 }
 
 temp = '';
-
+getStats = (cb) => {
+    url = 'https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/nakaza.json';
+    request({url,json:true},(error,{body}) => {
+        if(error){
+            cb('The app wasn\t able to get a data.',undefined);
+        }
+        else{
+            cb(undefined,body.data);
+        }
+    })
+}
 parserNum = (num) =>{
     num = num.toString();
-    // if(num.length < 4){
-    //     return num;
-    // }
     let st ='';
 
     for(i = 0; i < num.length; i++){
@@ -54,5 +62,6 @@ parserNum = (num) =>{
 module.exports = {
                     getCorona,
                     getDeaths,
+                    getStats,
                     parserNum
                 }

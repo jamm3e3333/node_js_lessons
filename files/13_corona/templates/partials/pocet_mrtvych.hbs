@@ -1,21 +1,25 @@
-<div class="main">
-    <h1>Data ke dni {{datum}}</h1>
+<div class="tab-div">
+    <h1>Data ke dni {{datum}}  pro ČR</h1>
     <table>
         <tr>
-            <td>Počet nakažených v ČR:</td>
-            <td>{{pocet_nakazenych}}</td>
+            <td><i class="fas fa-biohazard"></i></td>
+            <td> Počet nakažených:</td>
+            <td class="inf">{{pocet_nakazenych}}</td>
         </tr>
         <tr>
-            <td>Počet vyléčených v ČR:</td>
-            <td>{{pocet_vylecenych}}</td>
+            <td><i class="far fa-heart"></i></td>
+            <td> Počet vyléčených:</td>
+            <td class="cured">{{pocet_vylecenych}}</td>
         </tr>
         <tr>
-            <td>Počet úmrtí v ČR:</td>
-            <td>{{pocet_umrti}}</td>
+            <td><i class="fas fa-skull"></i></td>
+            <td> Počet úmrtí:</td>
+            <td class="dead">{{pocet_umrti}}</td>
         </tr>
         <tr>
-            <td>Počet testovaných v ČR:</td>
-            <td>{{pocet_testu}}</td>
+            <td><i class="fas fa-vials"></i></td>
+            <td> Počet testovaných:</td>
+            <td class="tested">{{pocet_testu}}</td>
         </tr>
     </table>
 </div>

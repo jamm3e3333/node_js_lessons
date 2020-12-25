@@ -18,64 +18,50 @@ hbs.registerPartials(pathPartials);
 app.use(express.static(pathPublic));
 
 app.get('',(req,res) => {
-    let mrtvy;
-    let pocet;
-
-    covid.getCorona((error,data) => {
+    covid.getStats((error,data) => {
         if(error){
             return res.send('error',{
                 error: 'Error 404'
             })
         }
-        let date = new Date();
-        let year = date.getFullYear();
-        let month = date.getMonth()%12+1;
-        let day = parseInt(date.toString().substr(8,2))-1;
-
-        let today = `${year}-${month}-${day}`
         
-
-        pocet = data.filter(poc => {
-            return poc.datum == today;
-        });
-
-        today = `${day}.${month}.${year}`
-        
+        today = `${data[data.length-1].datum.substr(8,2)}.${data[data.length-1].datum.substr(5,2)}.${data[data.length-1].datum.substr(0,4)}`;
         res.render('corona',{
             datum: today,
-            pocet: covid.parserNum(pocet[0].pocetCelkem)
+            pocet: covid.parserNum(data[data.length-1].pocetDen),
+            celkem: covid.parserNum(data[data.length-1].pocetCelkem),
+            name: 'Jakub Vala'
         });
         
     });
 })
 
 app.get('/deaths',(req,res) => {
-    covid.getDeaths((error,dataDeaths) => {
+    covid.getDeaths((error,data) => {
         if(error){
             return res.send('error',{
                 error: 'Error 404'
             })
         }
-        let date = new Date();
-        let year = date.getFullYear();
-        let month = date.getMonth()%12+1;
-        let day = parseInt(date.toString().substr(8,2))-1;
-    
-        let today = `${year}-${month}-${day}`
-        mrtvy = dataDeaths.filter(poc => {
-            return poc.datum == today;
-        });
-
-        today = `${day}.${month}.${year}`
+        
+        today = `${data[data.length-1].datum.substr(8,2)}.${data[data.length-1].datum.substr(5,2)}.${data[data.length-1].datum.substr(0,4)}`;
 
         res.render('deaths',{
             datum: today,
-            pocet_nakazenych: covid.parserNum(mrtvy[0].kumulovany_pocet_nakazenych),
-            pocet_vylecenych: covid.parserNum(mrtvy[0].kumulovany_pocet_vylecenych),
-            pocet_umrti: covid.parserNum(mrtvy[0].kumulovany_pocet_umrti),
-            pocet_testu: covid.parserNum(mrtvy[0].kumulovany_pocet_provedenych_testu)
+            pocet_nakazenych: covid.parserNum(data[data.length-1].kumulovany_pocet_nakazenych),
+            pocet_vylecenych: covid.parserNum(data[data.length-1].kumulovany_pocet_vylecenych),
+            pocet_umrti: covid.parserNum(data[data.length-1].kumulovany_pocet_umrti),
+            pocet_testu: covid.parserNum(data[data.length-1].kumulovany_pocet_provedenych_testu),
+            name: 'Jakub Vala'
         });
     });
+});
+
+app.get('/about',(req,res) => {
+    res.render('about',{
+        name: 'Jakub Vala',
+        company: 'mzcr'
+    })
 })
 
 app.listen(port,() => {
