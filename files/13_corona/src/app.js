@@ -30,7 +30,7 @@ app.get('',(req,res) => {
             datum: today,
             pocet: covid.parserNum(data[data.length-1].pocetDen),
             celkem: covid.parserNum(data[data.length-1].pocetCelkem),
-            name: 'Jakub Vala'
+            name: 'Jakub Vala',
         });
         
     });
