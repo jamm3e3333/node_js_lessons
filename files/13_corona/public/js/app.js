@@ -19,7 +19,7 @@ getCovid('https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/nakaza.json')
         }
 
         var chart = new Chart(ctx,{
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: dny,
                 datasets: [{
@@ -27,22 +27,18 @@ getCovid('https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/nakaza.json')
                     backgroundColor: 'rgba(26, 219, 203,0.7)',
                     borderColor: 'rgba(74, 255, 140,0.2)',
                     borderWidth: 5,
-                    pointRadius: 3,
                     pointHitRadius: 10,
-                    lineTension: 0.2,
-                    steppedLine: false,
                     fill: 'origin',
-                    pointBorderColor: 'pink',
-                    pointBorderWidth: 2,
-                    pointHoverBackgroundColor: 'lightblue',
-                    pointHoverBorderColor: 'yellow',
-                    pointHoverBorderWidth: 14,
-                    pointHoverBorderRadius: 10,
                     data: pocet
                 }]
             },
             options: {
-        
+                scales: {
+                    xAxes: [{
+                        barThickness: 60,
+                        maxBarThickness: 75
+                    }]
+                }
             }
         });
     })
