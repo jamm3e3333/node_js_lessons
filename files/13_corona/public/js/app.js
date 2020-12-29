@@ -35,8 +35,8 @@ getCovid('https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/nakaza.json')
             options: {
                 scales: {
                     xAxes: [{
-                        barThickness: 60,
-                        maxBarThickness: 75
+                        barThickness: 45,
+                        maxBarThickness: 50
                     }]
                 }
             }
