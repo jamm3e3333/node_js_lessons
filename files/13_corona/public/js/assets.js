@@ -47,6 +47,24 @@ var chart_2 = new Chart(ctx,{
         animation: {
             animateRotate: true,
             animateScale: false
+        },
+        title: {
+            display: true,
+            position: 'bottom',
+            text: 'corona virus status ČR',
+            fontSize: 20,
+            fontColor: 'rbg(97, 97, 97)',
+            padding: 15
+        },
+        legend:{
+            display: true,
+            position: 'right',
+            labels: {
+                boxWidth: 20,
+                fontSize: 16,
+                padding: 25,
+                usePointStyle: true
+            }
         }
     }
 })
