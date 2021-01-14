@@ -23,7 +23,7 @@ getCovid('https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/nakaza.json')
             data: {
                 labels: dny,
                 datasets: [{
-                    label: 'corona virus denní přírůstky za posledních 7 dní',
+                    label: 'počet nakažených',
                     backgroundColor: 'rgba(26, 219, 203,0.7)',
                     borderColor: 'rgba(74, 255, 140,0.2)',
                     borderWidth: 5,
@@ -38,6 +38,32 @@ getCovid('https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/nakaza.json')
                         barThickness: 45,
                         maxBarThickness: 50
                     }]
+                },
+                tooltips: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                    position: 'nearest',
+                    backgroundColor: 'rgba(247, 246, 230,0.7)',
+                    titleFontSize: 15,
+                    titleFontColor: 'black',
+                    titleSpacing: 4,
+                    titleAlign: 'center',
+                    titleMarginBottom: 8,
+                    bodyFontColor: 'black',
+                    bodyFontSize: 14,
+                    footerFontSize: 50,
+                    xPadding: 20,
+                    yPadding: 20,
+                    caretPadding: 5,
+                    caretSize: 15,
+                    cornerRadius: 7
+                },
+                title: {
+                    display: true,
+                    text: 'Corona virus denní přírůstky',
+                    position: 'bottom',
+                    fontSize: 20,
                 }
             }
         });

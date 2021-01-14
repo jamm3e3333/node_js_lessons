@@ -41,9 +41,9 @@ var chart_2 = new Chart(ctx,{
         }]
     },
     options: {
-        cutoutPercentage: 40,
-        rotation: 0.8*Math.PI,
-        circumference: 1.4*Math.PI,
+        cutoutPercentage: 65,
+        rotation: 1*Math.PI,
+        circumference: Math.PI,
         animation: {
             animateRotate: true,
             animateScale: false
@@ -58,7 +58,7 @@ var chart_2 = new Chart(ctx,{
         },
         legend:{
             display: true,
-            position: 'right',
+            position: 'top',
             labels: {
                 boxWidth: 20,
                 fontSize: 16,
