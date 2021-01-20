@@ -47,7 +47,7 @@ app.get('/users/:id', (req,res) => {
         })
         .catch((e) => {
             res.status(500)
-                .send();
+                .send(e);
         })
     console.log(req.params.id);
 })
@@ -63,6 +63,34 @@ app.post('/task',(req,res) => {
         .catch((err) => {
             res.status(400)
                .send(err);
+        })
+})
+
+app.get('/task', (req,res) => {
+    Task.find({})
+        .then((tasks) => {
+            res.send(tasks);
+        })
+        .catch((e) => {
+            res.status(500)
+                .send();
+        })
+})
+
+app.get('/task/:id', (req,res) => {
+    const _id = req.params.id;
+
+    Task.findById(_id)
+        .then((task) => {
+            if(!task){
+                return res.status(404)
+                            .send();
+            }
+            res.send(task);
+        })
+        .catch((e) => {
+            res.status(500)
+                .send(e);
         })
 })
 
