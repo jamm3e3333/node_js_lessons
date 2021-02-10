@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { model } = require('./user');
 
 const Task = mongoose.model('Task',{
     description: {
