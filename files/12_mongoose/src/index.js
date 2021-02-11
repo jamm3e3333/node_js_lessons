@@ -1,12 +1,20 @@
 const express = require('express');
 require('./db/mongoose.js');
-const { findOneAndUpdate } = require('./models/user.js');
-const userRouter = require('./routers/user.js');
-const taskRouter = require('./routers/task.js');
-const bcrypt = require('bcrypt');
+const userRouter = require('./routers/user');
+const taskRouter = require('./routers/task');
 
 const app = express();
 const port = process.env.PORT || 3030;
+
+app.use((req,res,next) => {
+    if(req){
+        res.send('Server is under the maintenance, please try again later.')
+            .status(503)
+    }
+    else{
+        next()
+    }
+})
 
 app.use(express.json());
 app.use(userRouter);
@@ -16,15 +24,15 @@ app.listen(port,() => {
     console.log(`Server is up on port ${port}`);
 })
 
-const myFunction = async () => {
-    const password = 'Red12345!';
-    const hashedPassword = await bcrypt.hash(password,8);
 
-    console.log(password);
-    console.log(hashedPassword);
+// const myFunction = async () => {
+//     const token = jwt.sign({_id: 'abc'},'thisismytoken',{expiresIn:'7 days'});
+//     console.log(token);
 
-    const isMatch = await bcrypt.compare('Red12345!',hashedPassword);
-    console.log(isMatch);
-}
+//     const data = jwt.verify(token, 'thisismytoken');
+//     console.log(data);
+// }
+
+
 
 //myFunction();
