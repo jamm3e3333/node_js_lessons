@@ -1,5 +1,6 @@
 const express = require('express');
 const multer = require('multer');
+const sharp = require('sharp');
 const User = require('../models/user.js');
 const auth = require('../middleware/auth.js');
 const router = new express.Router();
@@ -60,7 +61,6 @@ router.post('/users/logoutAll', auth, async(req,res) => {
 })
 
 const upload = multer({
-    dest: 'images/avatar',
     limits: {
         fileSize: 1000000
     },
@@ -72,10 +72,34 @@ const upload = multer({
     }
 })
 
-router.post('/users/me/avatar', upload.single('avatar'), (req,res) => {
-    res.send();
+router.post('/users/me/avatar', auth, upload.single('avatar'), async (req,res) => {
+    try{
+        if(!req.file.buffer){
+            throw new Error("You sent an empty file.");
+        }
+        const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer();
+        req.user.avatar = buffer;
+        await req.user.save();
+        res.send();
+    }
+    catch(e){
+        res.send({error: e.message})
+            .status(400);
+    }
 },(error,req,res,next) => {
     res.status(400).send({error: error.message});
+})
+
+router.delete('/users/avatar/me', auth, async(req,res) => {
+    try{
+        req.user.avatar = undefined;
+        await req.user.save();
+        res.send(req.user);
+    }
+    catch(e){
+        res.status(400)
+            .send({error: e.message});
+    }
 })
 
 router.get('/users/me', auth, async(req,res) => {
@@ -137,6 +161,21 @@ router.delete('/users/me', auth, async(req,res) => {
     catch(e){
         res.status(400)
             .send(e);
+    }
+})
+
+router.get('/users/:id/avatar', async(req, res) => {
+    try{
+        const user = await User.findById(req.params.id);
+        if(!user || !user.avatar){
+            throw new Error("There\'s no user or user\'s avatar");
+        }
+        res.set('Content-Type', 'image/png');
+        res.send(user.avatar);
+    }
+    catch(e){
+        req.status(404)
+            .send();
     }
 })
 
