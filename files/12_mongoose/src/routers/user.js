@@ -3,11 +3,17 @@ const multer = require('multer');
 const sharp = require('sharp');
 const User = require('../models/user.js');
 const auth = require('../middleware/auth.js');
+const e = require('express');
 const router = new express.Router();
 
 router.post('/users', async(req,res) => {
-    const user = new User(req.body);
-
+    let user;
+    try{
+        user = new User(req.body);
+    }
+    catch(error){
+        res.send({Error: error.message}).status(400);
+    }
     try{
         if(!user){
             return res.status(404)
