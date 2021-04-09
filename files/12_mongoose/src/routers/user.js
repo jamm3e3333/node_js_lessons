@@ -7,13 +7,7 @@ const e = require('express');
 const router = new express.Router();
 
 router.post('/users', async(req,res) => {
-    let user;
-    try{
-        user = new User(req.body);
-    }
-    catch(error){
-        res.send({Error: error.message}).status(400);
-    }
+    const user = new User(req.body);
     try{
         if(!user){
             return res.status(404)

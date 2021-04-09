@@ -22,4 +22,4 @@ const emailSend = (to, subject, text) => {
     });
 }
 
-emailSend('jakub.valaa@seznam.cz','kar','ahoj vole jak to jde');
+emailSend('brendasilverio03@gmail.com','brendita <3 ','Hola Brendita\nQueremos informarte que tú eres el chiccy nuggy más linda.\nQue tengas un buen día.');
